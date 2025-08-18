@@ -124,7 +124,7 @@ export default function HeroSection() {
               className="relative aspect-square"
             >
               <Image
-                src="/seb.jpeg"
+                src="/j1sky blue.jpeg"
                 alt="Baywoods Streetwear"
                 fill
                 className="object-cover rounded-2xl shadow-xl"
