@@ -7,10 +7,10 @@ import { useState, useEffect } from 'react'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
-  const [favoritesCount, setFavoritesCount] = useState(0)
-  const [cartCount, setCartCount] = useState(0)
+  const [favoritesCount, setFavoritesCount] = useState(3)
+  const [cartCount, setCartCount] = useState(2)
   const [searchQuery, setSearchQuery] = useState('')
-  const [suggestions, setSuggestions] = useState([]) // Removed TypeScript annotation
+  const [suggestions, setSuggestions] = useState([])
   const [searchOpen, setSearchOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -22,13 +22,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Mock data - replace with actual data fetching in a real app
-  useEffect(() => {
-    setFavoritesCount(3)
-    setCartCount(2)
-  }, [])
-
-  // Fake suggestion logic - replace with API call
   useEffect(() => {
     if (searchQuery.length > 0) {
       setSuggestions([
@@ -44,223 +37,173 @@ const Navbar = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    // Handle search submission
     console.log('Searching for:', searchQuery)
     setSearchOpen(false)
   }
 
   return (
     <>
-      {/* Desktop Navigation Bar */}
-      <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white/80 shadow-sm backdrop-blur-lg' : 'bg-transparent'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+      {/* Centered Curved Navbar */}
+      <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 rounded-full ${scrolled ? 'bg-white/10 backdrop-blur-md border border-white/20 shadow-lg' : 'bg-white/90 backdrop-blur-sm border border-gray-200 shadow-xl'} w-[95%] max-w-4xl`}>
+        <div className="mx-auto px-6">
+          <div className="flex items-center justify-between h-16">
             
-            {/* Left: Logo and Mobile Menu Button */}
-            <div className="flex items-center">
-              {/* Mobile Menu Button */}
-              <button 
-                className="md:hidden mr-4 p-1"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+            {/* Logo - Centered */}
+            <Link href="/" className="flex items-center group ml-4">
+              <div className="w-14 h-14 relative mr-2 group-hover:rotate-12 transition-transform">
+                <Image
+                  src="/second.png"
+                  alt="Baywoods Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span className="text-xl font-extrabold tracking-tighter">
+               
+              </span>
+            </Link>
 
-              {/* Logo */}
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="w-10 h-10 relative">
-                  <Image
-                    src="/logo.png"
-                    alt="Baywoods Logo"
-                    fill
-                    className="rounded-full object-cover"
-                    priority
-                  />
-                </div>
-                <span className="hidden sm:block text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-600">
-                  BAYWOODS
-                </span>
-              </Link>
+            {/* Desktop Navigation - Curved Links */}
+            <div className="hidden md:flex items-center space-x-1">
+              <Link href="/" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Home</Link>
+              <Link href="/shop" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Shop</Link>
+              <Link href="/collections" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Collections</Link>
+              <Link href="/sale" className="px-4 py-1.5 rounded-full bg-red-500 text-white font-medium hover:bg-red-600 transition-all">Sale</Link>
+              <Link href="/impact" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Impact</Link>
             </div>
 
-            {/* Center: Navigation Links (Desktop) */}
-            <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
-              <Link href="/" className="hover:text-gray-600 transition-colors">Home</Link>
-              <Link href="/shop" className="hover:text-gray-600 transition-colors">Shop</Link>
-              <Link href="/collections" className="hover:text-gray-600 transition-colors">Collections</Link>
-              <Link href="/sale" className="text-red-500 hover:text-red-600 transition-colors">Sale</Link>
-              <Link href="/impact" className="hover:text-gray-600 transition-colors">Impact</Link>
-              <Link href="/contact" className="hover:text-gray-600 transition-colors">Contact</Link>
-            </div>
-
-            {/* Right: Icons and Search (Desktop) */}
-            <div className="flex items-center space-x-5">
-              {/* Search Button (Mobile) */}
+            {/* Action Icons - Circular Design */}
+            <div className="flex items-center space-x-2">
               <button 
-                className="md:hidden p-1 hover:bg-gray-100 rounded-full transition-colors"
+                className="md:hidden p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-700"
                 onClick={() => setSearchOpen(!searchOpen)}
               >
                 <Search className="w-5 h-5" />
               </button>
 
-              {/* Search Bar (Desktop) */}
-              <div className="hidden md:block relative">
-                <input
-                  type="text"
-                  placeholder="Search sneakers, caps, clothing..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-black focus:outline-none w-64 text-sm"
-                />
-                <Search className="absolute right-3 top-2.5 w-4 h-4 text-gray-500" />
-                
-                {/* Suggestions Dropdown */}
-                {suggestions.length > 0 && (
-                  <div className="absolute mt-2 w-full bg-white shadow-lg rounded-lg p-2 z-50 border border-gray-200">
-                    {suggestions.map((s, i) => (
-                      <div 
-                        key={i} 
-                        className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm"
-                        onClick={() => {
-                          setSearchQuery(s.replace(/^Trending: |Search "|" in Caps|New Arrivals for "|"|Sale items matching "/g, ''))
-                          setSuggestions([])
-                        }}
-                      >
-                        {s}
-                      </div>
-                    ))}
-                  </div>
-                )}
+              <div className="hidden md:flex items-center space-x-1">
+                <Link href="/favorites" className={`relative p-2 rounded-full transition-colors ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-700'}`}>
+                  <Heart className="w-5 h-5" />
+                  {favoritesCount > 0 && (
+                    <span className={`absolute -top-1 -right-1 text-xs rounded-full h-5 w-5 flex items-center justify-center border-2 ${scrolled ? 'bg-red-500 text-white border-white/20' : 'bg-red-500 text-white border-white'}`}>
+                      {favoritesCount}
+                    </span>
+                  )}
+                </Link>
+
+                <Link href="/cart" className={`relative p-2 rounded-full transition-colors ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-700'}`}>
+                  <ShoppingCart className="w-5 h-5" />
+                  {cartCount > 0 && (
+                    <span className={`absolute -top-1 -right-1 text-xs rounded-full h-5 w-5 flex items-center justify-center border-2 ${scrolled ? 'bg-white text-gray-900 border-white/20' : 'bg-gray-900 text-white border-white'}`}>
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
               </div>
 
-              {/* Favorites */}
-              <Link href="/favorites" className="relative p-1 hover:bg-gray-100 rounded-full transition-colors">
-                <Heart className="w-5 h-5" />
-                {favoritesCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {favoritesCount}
-                  </span>
-                )}
-              </Link>
-
-              {/* Cart */}
-              <Link href="/cart" className="relative p-1 hover:bg-gray-100 rounded-full transition-colors">
-                <ShoppingCart className="w-5 h-5" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
-
-              {/* Account */}
-              <Link href="/account" className="p-1 hover:bg-gray-100 rounded-full transition-colors">
-                <User className="w-5 h-5" />
-              </Link>
+              <button 
+                className="md:hidden p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-700"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Curved Design */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
-            <div className="px-4 py-3 space-y-4">
+          <div className="md:hidden bg-white rounded-2xl shadow-lg mx-4 mt-2 px-6 py-4">
+            <div className="space-y-2">
               <Link 
                 href="/" 
-                className="block py-2 hover:bg-gray-100 px-2 rounded"
+                className="block px-4 py-3 rounded-full hover:bg-gray-100 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/shop" 
-                className="block py-2 hover:bg-gray-100 px-2 rounded"
+                className="block px-4 py-3 rounded-full hover:bg-gray-100 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Shop
               </Link>
               <Link 
                 href="/collections" 
-                className="block py-2 hover:bg-gray-100 px-2 rounded"
+                className="block px-4 py-3 rounded-full hover:bg-gray-100 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Collections
               </Link>
               <Link 
                 href="/sale" 
-                className="block py-2 text-red-500 hover:bg-red-50 px-2 rounded"
+                className="block px-4 py-3 rounded-full bg-red-50 text-red-500 hover:bg-red-100 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Sale
               </Link>
               <Link 
                 href="/impact" 
-                className="block py-2 hover:bg-gray-100 px-2 rounded"
+                className="block px-4 py-3 rounded-full hover:bg-gray-100 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Impact
               </Link>
-              <Link 
-                href="/contact" 
-                className="block py-2 hover:bg-gray-100 px-2 rounded"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Contact
-              </Link>
             </div>
+          </div>
+        )}
+
+        {/* Mobile Search - Rounded Design */}
+        {searchOpen && (
+          <div className="md:hidden fixed top-4 left-4 right-4 z-50 bg-white rounded-2xl shadow-xl p-4">
+            <div className="flex items-center">
+              <form onSubmit={handleSearchSubmit} className="flex-1 flex bg-gray-100 rounded-full pl-4 pr-1 py-1">
+                <input
+                  type="text"
+                  placeholder="Search streetwear..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="bg-transparent border-none focus:outline-none w-full placeholder-gray-500"
+                  autoFocus
+                />
+                <button 
+                  type="submit"
+                  className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
+                >
+                  <Search className="w-4 h-4 text-gray-700" />
+                </button>
+              </form>
+              <button 
+                className="ml-2 p-2 hover:bg-gray-100 rounded-full transition-colors"
+                onClick={() => setSearchOpen(false)}
+              >
+                <X className="w-5 h-5 text-gray-700" />
+              </button>
+            </div>
+
+            {suggestions.length > 0 && (
+              <div className="mt-2 bg-white rounded-xl shadow-inner p-2">
+                {suggestions.map((s, i) => (
+                  <div 
+                    key={i} 
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm rounded-lg"
+                    onClick={() => {
+                      setSearchQuery(s.replace(/^Trending: |Search "|" in Caps|New Arrivals for "|"|Sale items matching "/g, ''))
+                      setSearchOpen(false)
+                    }}
+                  >
+                    {s}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </nav>
 
-      {/* Mobile Search Overlay */}
-      {searchOpen && (
-        <div className="fixed top-0 left-0 right-0 bg-white z-50 p-4 shadow-md md:hidden">
-          <div className="flex items-center">
-            <form onSubmit={handleSearchSubmit} className="flex-1 flex">
-              <input
-                type="text"
-                placeholder="Search sneakers, caps, clothing..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black"
-                autoFocus
-              />
-              <button 
-                type="submit"
-                className="bg-black text-white px-4 py-2 rounded-r-full"
-              >
-                <Search className="w-5 h-5" />
-              </button>
-            </form>
-            <button 
-              className="ml-2 p-2"
-              onClick={() => setSearchOpen(false)}
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Mobile Search Suggestions */}
-          {suggestions.length > 0 && (
-            <div className="mt-2 bg-white">
-              {suggestions.map((s, i) => (
-                <div 
-                  key={i} 
-                  className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm border-b border-gray-100"
-                  onClick={() => {
-                    setSearchQuery(s.replace(/^Trending: |Search "|" in Caps|New Arrivals for "|"|Sale items matching "/g, ''))
-                    setSearchOpen(false)
-                  }}
-                >
-                  {s}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Padding to prevent content from being hidden behind navbar */}
+      {/* Spacer with extra top padding */}
       <div className="h-20"></div>
     </>
   )
