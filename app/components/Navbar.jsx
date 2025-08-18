@@ -66,11 +66,11 @@ const Navbar = () => {
 
             {/* Desktop Navigation - Curved Links */}
             <div className="hidden md:flex items-center space-x-1">
-              <Link href="/" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Home</Link>
-              <Link href="/shop" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Shop</Link>
-              <Link href="/collections" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Collections</Link>
-              <Link href="/sale" className="px-4 py-1.5 rounded-full bg-red-500 text-white font-medium hover:bg-red-600 transition-all">Sale</Link>
-              <Link href="/impact" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-white' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Impact</Link>
+              <Link href="/" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-black' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Home</Link>
+              <Link href="/shop" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-grey-900' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Shop</Link>
+              <Link href="/collections" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-grey-800' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Collections</Link>
+              <Link href="/sale" className="px-4 py-1.5 rounded-full bg-red-500 text-black font-medium hover:bg-red-600 transition-all">Sale</Link>
+              <Link href="/impact" className={`px-4 py-1.5 rounded-full ${scrolled ? 'hover:bg-white/20 text-black' : 'hover:bg-gray-100 text-gray-900'} font-medium transition-all`}>Impact</Link>
             </div>
 
             {/* Action Icons - Circular Design */}
