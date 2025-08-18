@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import Trendy from './components/Trendy'
 import Newarrivals from './components/Newarrivals'
+import PageCard from './components/PageCard'
 export default function page() {
   return (
     <div>
@@ -10,6 +11,7 @@ export default function page() {
       <HeroSection />
       <Trendy />
       <Newarrivals />
+      <PageCard />
     </div>
   )
 }
