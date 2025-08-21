@@ -122,15 +122,16 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="relative aspect-square"
-            >
-              <Image
-                src="/j1sky blue.jpeg"
-                alt="Baywoods Streetwear"
-                fill
-                className="object-cover rounded-2xl shadow-xl"
-                priority
-              />
-              
+                          >
+                <video
+                src="/SOMZY.mp4"   // put your video file inside /public
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="object-cover rounded-2xl shadow-xl w-full h-full"
+              ></video>
+
               {/* Floating Badge */}
               <div className="absolute -bottom-4 -right-4 bg-white px-4 py-2 rounded-full shadow-md flex items-center">
                 <ShoppingBag className="w-5 h-5 mr-2 text-black" />

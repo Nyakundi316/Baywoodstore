@@ -4,6 +4,6 @@
     "paths": { "@/*": ["*"] },
     "checkJs": false
   },
-  "include": ["**/*.js", "**/*.jsx", "next-env.d.ts", "app/collections/[handle].jsx"],
+  "include": ["**/*.js", "**/*.jsx", "next-env.d.ts", "app/collections/[handle].jsx", "app/components/Footer.tsx", "app/impact/page.tsx"],
   "exclude": ["node_modules"]
 }

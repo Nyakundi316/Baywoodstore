@@ -7,6 +7,7 @@
   --background: #ffffff;
   --foreground: #171717;
   --dot-color: #0000001a; /* Light mode dots */
+  --accent: #008080; /* Baywoods accent color (tealish) */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,6 +15,7 @@
     --background: #0a0a0a;
     --foreground: #ededed;
     --dot-color: #ffffff1a; /* Dark mode dots */
+    --accent: #00bfa5; /* Brighter accent for dark mode */
   }
 }
 
@@ -29,7 +31,7 @@ body {
   background-size: 20px 20px;
 }
 
-/* Optional: Add a subtle animation to the dots */
+/* Optional: animated dots */
 @keyframes dots-move {
   0% { background-position: 0 0; }
   100% { background-position: 20px 20px; }
@@ -37,4 +39,11 @@ body {
 
 .animated-dots {
   animation: dots-move 60s linear infinite;
+}
+
+/* Gradient overlay on dots (extra style if you want to use it) */
+.bg-dots-gradient {
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px),
+                    linear-gradient(135deg, #f0f9ff 0%, #a1dbff 100%);
+  background-size: 20px 20px, cover;
 }
